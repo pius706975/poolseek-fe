@@ -10,15 +10,19 @@ import {
 } from 'react';
 
 const OTPFotgotPassword = ({
+    email,
+    setEmail,
     onResendOTP,
     onVerifyOTP,
     isVerifying,
 }: {
+    email: string;
+    setEmail: (email: string) => void;
     onResendOTP: () => void;
     onVerifyOTP: (otp: string) => void;
     isVerifying: boolean;
 }) => {
-    const [email, setEmail] = useState('');
+    // const [email, setEmail] = useState('');
     const [otp, setOtp] = useState<string[]>(Array(6).fill(''));
     const [countdown, setCountdown] = useState<number>(0);
     const [isCounting, setIsCounting] = useState<boolean>(false);
@@ -140,19 +144,19 @@ const OTPFotgotPassword = ({
 
                 <Button
                     type="button"
-                    className={
-                        isValidEmail(email)
+                    className={`${
+                        isValidEmail(email) && !isCounting
                             ? 'bg-[#4169E1] hover:bg-[#3656B3] active:bg-[#2C4499] text-white'
-                            : 'bg-gray-700 text-gray-500 cursor-not-allowed'
-                    }
-                    disabled={!isValidEmail(email)}
+                            : 'bg-gray-700 text-gray-300 cursor-not-allowed'
+                    } transition-colors duration-200`}
+                    disabled={!isValidEmail(email) || isCounting}
                     onClick={handleResend}>
-                    Send OTP
+                    {isCounting ? `Send OTP in ${countdown}s` : 'Send OTP'}
                 </Button>
             </form>
 
             <p className="text-center text-gray-500 dark:text-gray-300">
-                Enter the 6-digit code sent to your device
+                Enter the 6-digit code sent to your email
             </p>
 
             <form onSubmit={handleSubmit} className="mt-4">

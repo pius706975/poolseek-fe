@@ -60,6 +60,7 @@ const AccountVerificationPage = () => {
                     ) {
                         addToast('success', 'Account is verified');
                         router.push('/sign-in');
+                        
                         setTimeout(() => {
                             dispatch(clearEmailForVerification());
                         }, 20000);
