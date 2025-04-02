@@ -17,8 +17,6 @@ const AccountVerificationPage = () => {
     const { addToast } = useToast();
     const dispatch = useDispatch();
 
-    console.log('email :', email);
-
     if (email === null) {
         router.push('/sign-up');
     }
@@ -40,7 +38,7 @@ const AccountVerificationPage = () => {
                     }
                 },
                 onError: error => {
-                    console.error(error);
+                    console.log(error);
                 },
             },
         );
@@ -63,7 +61,7 @@ const AccountVerificationPage = () => {
                         
                         setTimeout(() => {
                             dispatch(clearEmailForVerification());
-                        }, 20000);
+                        }, 60000);
                     }
                 },
                 onError: error => {

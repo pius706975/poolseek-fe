@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface AuthState {
     emailForVerification: string | null;
+    isOTPVerified: boolean;
 }
 
 const initialState: AuthState = {
@@ -9,6 +10,11 @@ const initialState: AuthState = {
         typeof window !== 'undefined'
             ? sessionStorage.getItem('emailForVerification')
             : null,
+
+    isOTPVerified:
+        typeof window !== 'undefined'
+            ? sessionStorage.getItem('isOTPVerified') === 'true'
+            : false,
 };
 
 const authSlice = createSlice({
@@ -23,9 +29,21 @@ const authSlice = createSlice({
             state.emailForVerification = null;
             sessionStorage.removeItem('emailForVerification');
         },
+        setOTPVerified: (state, action: PayloadAction<boolean>) => {
+            state.isOTPVerified = action.payload;
+            sessionStorage.setItem('isOTPVerified', String(action.payload));
+        },
+        clearOTPVerified: state => {
+            state.isOTPVerified = false;
+            sessionStorage.removeItem('isOTPVerified');
+        },
     },
 });
 
-export const { setEmailForVerification, clearEmailForVerification } =
-    authSlice.actions;
+export const {
+    setEmailForVerification,
+    clearEmailForVerification,
+    setOTPVerified,
+    clearOTPVerified,
+} = authSlice.actions;
 export default authSlice.reducer;

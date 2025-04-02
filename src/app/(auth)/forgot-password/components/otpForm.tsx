@@ -9,7 +9,7 @@ import {
     type ClipboardEvent,
 } from 'react';
 
-const OTPFotgotPassword = ({
+const OTPForgotPassword = ({
     email,
     setEmail,
     onResendOTP,
@@ -22,7 +22,6 @@ const OTPFotgotPassword = ({
     onVerifyOTP: (otp: string) => void;
     isVerifying: boolean;
 }) => {
-    // const [email, setEmail] = useState('');
     const [otp, setOtp] = useState<string[]>(Array(6).fill(''));
     const [countdown, setCountdown] = useState<number>(0);
     const [isCounting, setIsCounting] = useState<boolean>(false);
@@ -203,4 +202,4 @@ const OTPFotgotPassword = ({
     );
 };
 
-export default OTPFotgotPassword;
+export default OTPForgotPassword;
