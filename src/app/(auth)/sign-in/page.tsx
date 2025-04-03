@@ -4,21 +4,84 @@ import Input from '@/components/input/Input';
 import Button from '@/components/button/Button';
 import { GoogleIcon } from '@/components/icons/google';
 import Link from 'next/link';
-// import { ErrorToast } from '@/components/toast/Toast';
 import validateSignIn from './validator';
-import { useTheme } from 'next-themes';
 import PoolSeekLogo from '@/assets/svg/brand/brandLogo';
 import { useToast } from '@/components/toast/ToastProvider';
+import { useSignIn } from '@/services/users/auth';
+import { getDeviceInfo } from '@/utils/getDeviceInfo';
+import { encryptData } from '@/utils/crypto';
 
 export default function SignInPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [deviceInfo, setDeviceInfo] = useState({
+        device_id: '',
+        device_name: '',
+        device_model: '',
+    });
+
     const { addToast } = useToast();
+    const signInMutation = useSignIn();
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setDeviceInfo(getDeviceInfo());
+        }
+    }, []);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        validateSignIn(email, password, message => addToast('error', message));
+        validateSignIn(email, password, message => {
+            addToast('error', message);
+            return;
+        });
+
+        signInMutation.mutate(
+            {
+                email,
+                password,
+                device_id: deviceInfo.device_id,
+                device_model: deviceInfo.device_model,
+                device_name: deviceInfo.device_name,
+            },
+            {
+                onSuccess: res => {
+                    const response = res.data.data;
+                    console.log(response.refresh_token);
+
+                    if (
+                        res.data.message === 'Successfully signed in' ||
+                        res.status === 200
+                    ) {
+                        addToast('success', res.data.message);
+
+                        localStorage.setItem(
+                            'access_token',
+                            encryptData(response.access_token),
+                        );
+                        localStorage.setItem(
+                            'refresh_token',
+                            encryptData(response.refresh_token),
+                        );
+                        localStorage.setItem(
+                            'user_id',
+                            encryptData(response.user.id),
+                        );
+                    }
+                },
+                onError: error => {
+                    if (
+                        error.response?.status === 401 ||
+                        // @ts-ignore
+                        error.response?.data.error ===
+                            'Email or password is invalid'
+                    ) {
+                        addToast('error', 'Email or password is invalid');
+                    }
+                },
+            },
+        );
     };
 
     return (
@@ -56,7 +119,11 @@ export default function SignInPage() {
                             </Link>
                         </p>
 
-                        <Button onClick={() => {}}>Sign In</Button>
+                        <Button type="submit">
+                            {signInMutation.isPending
+                                ? 'Signing In...'
+                                : 'Sign In'}
+                        </Button>
                     </form>
 
                     <div className="text-center mt-4 dark:text-gray-300 text-gray-500">

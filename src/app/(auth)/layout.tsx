@@ -5,8 +5,19 @@ import QueryProvider from './QueryProvider';
 import { Provider } from 'react-redux';
 import store from '@/store/store';
 import { ToastProvider } from '@/components/toast/ToastProvider';
+import { setEmailForVerification, setOTPVerified } from '@/store/authSlice';
 
-const Layout = async ({ children }: { children: React.ReactNode }) => {
+if (typeof window !== 'undefined') {
+    window.addEventListener('storage', () => {
+        const email = sessionStorage.getItem('emailForVerification');
+        const isOTPVerified = sessionStorage.getItem('isOTPVerified') === 'true';
+
+        store.dispatch(setEmailForVerification(email || ''));
+        store.dispatch(setOTPVerified(isOTPVerified));
+    });
+}
+
+const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <main>
             <Provider store={store}>
