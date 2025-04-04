@@ -42,8 +42,12 @@ export function useHandleSignUp() {
                     const response = res.data;
                     if (response.message === 'Successfully signed up') {
                         addToast('success', response.message);
+
+                        console.log('Response Data:');
+                        console.log(response.data);
+
                         router.push('/account-verification');
-                        dispatch(setEmailForVerification(response.data.user.email));
+                        dispatch(setEmailForVerification(response.data.email));
                     }
                 },
                 onError: error => {

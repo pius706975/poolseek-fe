@@ -5,6 +5,27 @@ export type TSignUp = {
     password: string;
 };
 
+export type SignUpResponse = {
+    message: string;
+    data: {
+        id: string;
+        firebase_id: string;
+        google_id: string;
+        email: string;
+        first_name: string;
+        last_name: string;
+        image: string;
+        role_id: number;
+        phone_number: number;
+        password: number;
+        otp_code: string;
+        otp_expiration: string;
+        is_verified: boolean;
+        created_at: string;
+        updated_at: string;
+    };
+};
+
 export type TSignIn = {
     email: string;
     password: string;
@@ -61,9 +82,9 @@ export type RefreshTokenResponse = {
 };
 
 export type TSignOut = {
-    device_id: string
-}
+    device_id: string;
+};
 
 export type SignOutResponse = {
-    message: string
-}
+    message: string;
+};
