@@ -5,7 +5,7 @@
 @layer base {
     html,
     body {
-        @apply dark:bg-black;
+        @apply dark:bg-gray-900;
     }
 
     /* ::-webkit-scrollbar {
