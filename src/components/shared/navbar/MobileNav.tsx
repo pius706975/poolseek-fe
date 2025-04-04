@@ -99,7 +99,7 @@ export default function MobileNavigation() {
                     }
                     disabled={!canScrollLeft}
                     aria-label="Scroll left">
-                    <ChevronLeftIcon size={20} />
+                    <ChevronLeftIcon />
                 </button>
 
                 {/* Navigation items */}
@@ -117,7 +117,7 @@ export default function MobileNavigation() {
                                     ? ' bg-[#4169E1] text-white rounded-full px-3'
                                     : '')
                             }>
-                            <item.icon size={20} className="mb-1" />
+                            <item.icon className="mb-1" />
                             <span className="truncate max-w-[60px] text-center">
                                 {item.name}
                             </span>
@@ -136,7 +136,7 @@ export default function MobileNavigation() {
                     }
                     disabled={!canScrollRight}
                     aria-label="Scroll right">
-                    <ChevronRightIcon size={20} />
+                    <ChevronRightIcon />
                 </button>
             </div>
         </div>
