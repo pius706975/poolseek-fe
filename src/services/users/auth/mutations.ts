@@ -5,6 +5,7 @@ import {
     ResetPasswordResponse,
     SignInResponse,
     SignOutResponse,
+    SignUpResponse,
     TRefreshToken,
     TResetPassword,
     TSignIn,
@@ -20,10 +21,10 @@ import {
 } from './requests';
 
 export const useSignUp = () =>
-    useMutation<AxiosResponse<SignInResponse>, AxiosError, TSignUp>({
+    useMutation<AxiosResponse<SignUpResponse>, AxiosError, TSignUp>({
         mutationFn: async (
             data: TSignUp,
-        ): Promise<AxiosResponse<SignInResponse>> => await signUp(data),
+        ): Promise<AxiosResponse<SignUpResponse>> => await signUp(data),
     });
 
 export const useSignIn = () =>
