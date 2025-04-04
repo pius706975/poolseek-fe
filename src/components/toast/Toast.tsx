@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 interface ToastProps {
     id: number;
-    type: 'success' | 'error';
+    type: 'success' | 'error' | 'info';
     message: string;
 }
 
@@ -28,8 +28,10 @@ const Toast = ({ id, type, message }: ToastProps) => {
             className={`relative max-w-md w-full sm:w-auto min-w-[300px] rounded-lg shadow-lg transition-transform duration-300 ease-in-out
                 ${
                     type === 'success'
-                        ? 'bg-[#4169E1] text-white'
-                        : 'bg-red-600 text-white'
+                        ? 'bg-[#4169E1] text-white' 
+                        : type === 'error'
+                        ? 'bg-red-600 text-white' 
+                        : 'bg-blue-500 text-white'
                 }
             `}>
             <div className="relative overflow-hidden rounded-lg p-4 pr-10 flex items-center gap-3">

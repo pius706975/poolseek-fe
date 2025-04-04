@@ -121,7 +121,7 @@ const OTPValidationForm = ({
                 Verification Code
             </h2>
             <p className="text-center text-gray-500 dark:text-gray-300">
-                Enter the 6-digit code sent to your device
+                Enter the 6-digit code sent to your email
             </p>
 
             <form onSubmit={handleSubmit} className="mt-4">

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSignUp } from '@/services/users/auth';
 import validateSignUp from './validator';
 import { useRouter } from 'next/navigation';
@@ -12,6 +12,7 @@ export function useHandleSignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    
     const signUpMutation = useSignUp();
     const router = useRouter();
     const dispatch = useDispatch();
@@ -42,7 +43,7 @@ export function useHandleSignUp() {
                     if (response.message === 'Successfully signed up') {
                         addToast('success', response.message);
                         router.push('/account-verification');
-                        dispatch(setEmailForVerification(response.data.email));
+                        dispatch(setEmailForVerification(response.data.user.email));
                     }
                 },
                 onError: error => {

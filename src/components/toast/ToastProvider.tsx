@@ -4,12 +4,12 @@ import Toast from './Toast';
 
 interface ToastMessage {
     id: number;
-    type: 'success' | 'error';
+    type: 'success' | 'error' | 'info';
     message: string;
 }
 
 interface ToastContextType {
-    addToast: (type: 'success' | 'error', message: string) => void;
+    addToast: (type: 'success' | 'error' | 'info', message: string) => void;
 }
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
@@ -17,7 +17,7 @@ const ToastContext = createContext<ToastContextType | undefined>(undefined);
 export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
     const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
-    const addToast = (type: 'success' | 'error', message: string) => {
+    const addToast = (type: 'success' | 'error' | 'info', message: string) => {
         const id = Date.now();
         setToasts(prev => [...prev, { id, type, message }]);
 

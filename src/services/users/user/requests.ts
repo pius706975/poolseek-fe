@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import { TSendOTP, TVerifyOTP, VerifyOTPResponse } from "./types";
 import { SignInResponse } from "../auth/types";
-import axiosInstance from "@/contexts/auth/AxiosInstance";
+import axiosInstance from "@/contexts/AxiosInstance";
 
 export const sendOTP = async (
     req: TSendOTP,
