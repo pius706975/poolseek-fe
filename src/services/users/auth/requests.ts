@@ -4,6 +4,7 @@ import {
     ResetPasswordResponse,
     SignInResponse,
     SignOutResponse,
+    SignUpResponse,
     TRefreshToken,
     TResetPassword,
     TSignIn,
@@ -14,7 +15,7 @@ import axiosInstance from '@/contexts/AxiosInstance';
 
 export const signUp = async (
     req: TSignUp,
-): Promise<AxiosResponse<SignInResponse>> => {
+): Promise<AxiosResponse<SignUpResponse>> => {
     return await axiosInstance.post('/auth/signup', req);
 };
 

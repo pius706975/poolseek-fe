@@ -10,6 +10,7 @@ import { useToast } from '@/components/toast/ToastProvider';
 import { useSignIn } from '@/services/users/auth';
 import { getDeviceInfo } from '@/utils/getDeviceInfo';
 import { encryptData } from '@/utils/crypto';
+import { useRouter } from 'next/navigation';
 
 export default function SignInPage() {
     const [email, setEmail] = useState('');
@@ -21,6 +22,7 @@ export default function SignInPage() {
     });
 
     const { addToast } = useToast();
+    const router = useRouter()
     const signInMutation = useSignIn();
 
     useEffect(() => {
@@ -68,6 +70,8 @@ export default function SignInPage() {
                             'user_id',
                             encryptData(response.user.id),
                         );
+
+                        router.push('/')
                     }
                 },
                 onError: error => {
