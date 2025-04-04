@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
     title: 'PoolSeek',
     description: 'PoolSeek is a Q&A platform',
+    icons: '/img/brand.ico'
 };
 
 export default function RootLayout({
