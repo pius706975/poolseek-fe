@@ -10,7 +10,8 @@ import { setEmailForVerification, setOTPVerified } from '@/store/authSlice';
 if (typeof window !== 'undefined') {
     window.addEventListener('storage', () => {
         const email = sessionStorage.getItem('emailForVerification');
-        const isOTPVerified = sessionStorage.getItem('isOTPVerified') === 'true';
+        const isOTPVerified =
+            sessionStorage.getItem('isOTPVerified') === 'true';
 
         store.dispatch(setEmailForVerification(email || ''));
         store.dispatch(setOTPVerified(isOTPVerified));
@@ -24,7 +25,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 <ThemeProvider attribute="class">
                     <QueryProvider>
                         <ToastProvider>
-                            <ThemeChanger className="fixed top-4 left-4 p-2 rounded-full z-50 border border-purple-700 dark:border-white" />
+                            <ThemeChanger className="fixed bottom-4 right-4 p-2 rounded-full z-50 border border-[#4169E1] dark:border-white" />
                             <div>{children}</div>
                         </ToastProvider>
                     </QueryProvider>

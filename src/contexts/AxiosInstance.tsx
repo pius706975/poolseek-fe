@@ -2,6 +2,8 @@ import { refreshToken } from '@/services/users/auth/requests';
 import { TRefreshToken } from '@/services/users/auth/types';
 import { decryptData, encryptData } from '@/utils/crypto';
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 const api = process.env.NEXT_PUBLIC_API_URL;
 
