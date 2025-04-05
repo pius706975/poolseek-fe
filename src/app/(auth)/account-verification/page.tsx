@@ -2,7 +2,7 @@
 import OTPValidationForm from '@/components/form/otpForm';
 import { useToast } from '@/components/toast/ToastProvider';
 import { useSendOTP, useVerifyOTP } from '@/services/users/user';
-import { clearEmailForVerification } from '@/store/authSlice';
+import { clearEmailForVerification, clearOTPVerified } from '@/store/authSlice';
 import { RootState } from '@/store/store';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -61,6 +61,7 @@ const AccountVerificationPage = () => {
                         
                         setTimeout(() => {
                             dispatch(clearEmailForVerification());
+                            dispatch(clearOTPVerified())
                         }, 60000);
                     }
                 },

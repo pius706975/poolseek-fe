@@ -123,43 +123,67 @@ export default function Navbar() {
                     <div className="border-t border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950 md:hidden">
                         <div className="space-y-1 px-4 py-3">
                             <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-800">
-                                <div className="flex items-center px-3">
-                                    <div className="flex-shrink-0">
-                                        <div className="h-8 w-8 rounded-full bg-[#4169E1] text-white flex items-center justify-center">
-                                            <UserIcon />
+                                {isAuthenticated ? (
+                                    <div>
+                                        <div className="flex items-center px-3">
+                                            <div className="flex-shrink-0">
+                                                <div className="h-8 w-8 rounded-full bg-[#4169E1] text-white flex items-center justify-center">
+                                                    <UserIcon />
+                                                </div>
+                                            </div>
+                                            <div className="ml-3">
+                                                <div className="text-base font-medium text-gray-800 dark:text-white">
+                                                    Guest User
+                                                </div>
+                                                <div className="text-sm text-gray-500 dark:text-gray-400">
+                                                    guest@example.com
+                                                </div>
+                                            </div>
+                                            <button
+                                                className="ml-auto rounded-md p-1.5 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                                                aria-label="Notifications">
+                                                <BellIcon />
+                                            </button>
+                                        </div>
+                                        <div className="mt-3 space-y-1 px-2">
+                                            <Link
+                                                href="/profile"
+                                                className="block rounded-md px-3 py-2 text-base text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                                                onClick={() =>
+                                                    setIsMenuOpen(false)
+                                                }>
+                                                Your Profile
+                                            </Link>
+                                            <Link
+                                                href="/settings"
+                                                className="block rounded-md px-3 py-2 text-base text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                                                onClick={() =>
+                                                    setIsMenuOpen(false)
+                                                }>
+                                                Settings
+                                            </Link>
+                                            <button className="block w-full text-left rounded-md px-3 py-2 text-base text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
+                                                Sign out
+                                            </button>
                                         </div>
                                     </div>
-                                    <div className="ml-3">
-                                        <div className="text-base font-medium text-gray-800 dark:text-white">
-                                            Guest User
-                                        </div>
-                                        <div className="text-sm text-gray-500 dark:text-gray-400">
-                                            guest@example.com
-                                        </div>
+                                ) : (
+                                    <div className="">
+                                        <Link href="/sign-in">
+                                            <Button className="px-4 text-sm rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 dark:active:bg-[#3a5ecc] active:bg-[#3a5ecc] active:text-white">
+                                                Sign in
+                                            </Button>
+                                        </Link>
+
+                                        <p style={{visibility: 'hidden'}}>separator</p>
+
+                                        <Link href="/sign-up">
+                                            <Button className="px-4 text-sm rounded-md bg-[#4169E1] text-white hover:bg-[#3a5ecc] active:bg-gray-600">
+                                                Sign up
+                                            </Button>
+                                        </Link>
                                     </div>
-                                    <button
-                                        className="ml-auto rounded-md p-1.5 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
-                                        aria-label="Notifications">
-                                        <BellIcon />
-                                    </button>
-                                </div>
-                                <div className="mt-3 space-y-1 px-2">
-                                    <Link
-                                        href="/profile"
-                                        className="block rounded-md px-3 py-2 text-base text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
-                                        onClick={() => setIsMenuOpen(false)}>
-                                        Your Profile
-                                    </Link>
-                                    <Link
-                                        href="/settings"
-                                        className="block rounded-md px-3 py-2 text-base text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
-                                        onClick={() => setIsMenuOpen(false)}>
-                                        Settings
-                                    </Link>
-                                    <button className="block w-full text-left rounded-md px-3 py-2 text-base text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
-                                        Sign out
-                                    </button>
-                                </div>
+                                )}
                             </div>
                         </div>
                     </div>
