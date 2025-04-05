@@ -1,9 +1,9 @@
 import { UAParser } from 'ua-parser-js';
 import { v4 as uuidv4 } from 'uuid';
-import { encryptData } from './crypto';
+import { decryptData, encryptData } from './crypto';
 
 export const getDeviceInfo = () => {
-    let deviceId = localStorage.getItem('device_id');
+    let deviceId = decryptData(localStorage.getItem('device_id')!);
 
     if (!deviceId) {
         deviceId = uuidv4();
